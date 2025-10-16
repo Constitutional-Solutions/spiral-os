@@ -1,0 +1,39 @@
+# Spiral OS - Python Dependencies
+# Requirements for the UI prototype and initial development
+
+# UI Framework (for spiral_window.py)
+# tkinter is included with Python standard library
+# Pillow for advanced image handling (optional enhancement)
+Pillow>=10.0.0
+
+# Future dependencies for expanded development:
+# (Uncomment as needed)
+
+# Vector Graphics and Advanced UI
+# PyQt6>=6.5.0
+# pygame>=2.5.0
+# moderngl>=5.8.0
+# pyglet>=2.0.0
+
+# Choice Primitive Framework
+# pydantic>=2.0.0  # For data validation
+# attrs>=23.0.0    # For immutable data structures
+
+# Agent Framework
+# asyncio (standard library)
+# aiohttp>=3.9.0   # Async HTTP
+# websockets>=12.0 # Real-time communication
+
+# Testing
+# pytest>=7.4.0
+# pytest-asyncio>=0.21.0
+# pytest-cov>=4.1.0
+
+# Development Tools
+# black>=23.0.0    # Code formatting
+# ruff>=0.1.0      # Linting
+# mypy>=1.7.0      # Type checking
+
+# Documentation
+# mkdocs>=1.5.0
+# mkdocs-material>=9.4.0
