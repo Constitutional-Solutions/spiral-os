@@ -1,10 +1,13 @@
 # Spiral OS
+
 A lightweight, modular operating system grounded in spiral/choice primitives with Aletheia/family as core agents for system orchestration and UI.
 
 ## Vision
+
 Spiral OS reimagines computing through the lens of choice primitives and spiral dynamics. Rather than traditional hierarchical structures, the system operates as an interconnected web of choices, where each component can spiral into deeper complexity while maintaining simplicity at the surface.
 
 ### Core Principles
+
 - **Choice Primitives**: Every system interaction is fundamentally a choice between options
 - **Spiral Architecture**: Components can expand from simple to complex in spiral patterns
 - **Agent-Based Orchestration**: Aletheia family agents handle system coordination
@@ -12,6 +15,7 @@ Spiral OS reimagines computing through the lens of choice primitives and spiral 
 - **Vector-Based UI**: Scalable, responsive interface that adapts to choice complexity
 
 ## System Architecture
+
 ```
 spiral-os/
 ├── core/           # Kernel and primitive logic
@@ -22,6 +26,7 @@ spiral-os/
 ```
 
 ### Core Components
+
 - **Spiral Kernel**: Manages choice primitives and system state transitions
 - **Choice Router**: Routes user intentions through available system choices
 - **Aletheia Orchestrator**: Primary agent coordinating system resources
@@ -29,31 +34,67 @@ spiral-os/
 - **Connector Framework**: Handles external system integrations
 
 ## Current Status
+
 🚧 **Early Development Phase**
+
 This project is in active development. The current focus is on:
+
 1. Establishing core choice primitive patterns
 2. Building the minimal vector UI prototype
 3. Defining Aletheia agent behaviors
 4. Creating connector architecture
 
 ## Getting Started
+
 ### Prerequisites
+
 - Python 3.9+
 
 ### Quick Start
-```
-bash
+
+```bash
 # Clone the repository
 git clone https://github.com/Constitutional-Solutions/spiral-os.git
 cd spiral-os
+
 # Install dependencies (tkinter is stdlib; nothing else required yet)
 pip install -r requirements.txt || true
+
 # Run the UI prototype
 python -m ui.spiral_window
 ```
 
+### ⚠️ Known Issues - Required Fix for Execution
+
+**BLOCKER**: The `ui/` directory is missing an `__init__.py` file, which prevents Python from recognizing it as a package. Without this file, `python -m ui.spiral_window` will fail with `ModuleNotFoundError`.
+
+**Fix**: Create an empty `__init__.py` file in the `ui/` directory:
+
+```bash
+# From the project root
+touch ui/__init__.py
+```
+
+After creating this file, `python -m ui.spiral_window` will execute successfully.
+
+**Verification Summary**:
+- ✅ `spiral_window.py` has proper entry point (`if __name__ == "__main__": main()`)
+- ✅ All dependencies are from Python standard library (tkinter, json, math, time, dataclasses)
+- ✅ Code structure is sound with clear documentation
+- ❌ Missing `ui/__init__.py` prevents module execution
+- ℹ️ `requirements.txt` lists `Pillow>=10.0.0` but it's not currently used by `spiral_window.py`
+
+**Alternative Execution Method** (without fixing):
+
+```bash
+# Run directly as a script instead of as a module
+python ui/spiral_window.py
+```
+
 ## UI Prototype: spiral_window.py
+
 The UI exposes interactive 2D choice elements on a canvas:
+
 - Click a node to expand child choices (spiral outward)
 - Click an expanded node to collapse its subtree
 - Click a leaf to toggle selection
@@ -61,17 +102,21 @@ The UI exposes interactive 2D choice elements on a canvas:
 - See JSON event logs in the Log tab and agent messages in the Aletheia tab
 
 Features implemented:
+
 - Canvas-based nodes with vector links to parents
 - Event logging: expand, collapse, select, reset
 - Simulated Aletheia agent responses per event
 - Reset via button or ESC
 
 ### Extending to ND (multi-dimensional) overlays
+
 The UI includes modular hooks to add higher-dimensional overlays without changing core logic:
+
 - add_nd_dimension(name, renderer): register a renderer callable that receives (canvas, choices). The renderer can draw overlays (e.g., heatmaps, force vectors, timelines) and add bindings.
 - start_agent_dialog(context): placeholder to launch agent-driven dialogs (modal or panel) that can gather structured inputs and update choices.
 
 Recommended modular structure for ND elements:
+
 - ui/nd/
   - overlays.py: shared primitives for drawing ND layers
   - timelines.py: temporal overlays and sequencing
@@ -81,7 +126,9 @@ Recommended modular structure for ND elements:
 Each module should expose a register(app: SpiralWindow) that calls app.add_nd_dimension(...).
 
 ### Logging and Telemetry
+
 Logs are appended as JSON lines in the README Log tab at runtime. Each entry has:
+
 - t: epoch timestamp
 - type: one of [init, expand, collapse, select, reset]
 - additional fields per event (label, level, selected)
@@ -89,6 +136,7 @@ Logs are appended as JSON lines in the README Log tab at runtime. Each entry has
 For persistent logs, a future enhancement can write to disk via a connector (disabled by default for security).
 
 ## Roadmap
+
 - [x] Interactive 2D choices, logging, simulated Aletheia agent
 - [ ] Persist logs and agent transcripts
 - [ ] Pluggable ND overlays (timelines, constraints, metrics)
@@ -97,4 +145,5 @@ For persistent logs, a future enhancement can write to disk via a connector (dis
 - [ ] Theming and accessibility
 
 ## Contributing
+
 Issues and PRs are welcome. Please keep modules small and composable. Add docstrings and simple examples for ND renderers and dialogs.
