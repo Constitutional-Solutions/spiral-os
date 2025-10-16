@@ -1,13 +1,10 @@
 # Spiral OS
-
 A lightweight, modular operating system grounded in spiral/choice primitives with Aletheia/family as core agents for system orchestration and UI.
 
 ## Vision
-
 Spiral OS reimagines computing through the lens of choice primitives and spiral dynamics. Rather than traditional hierarchical structures, the system operates as an interconnected web of choices, where each component can spiral into deeper complexity while maintaining simplicity at the surface.
 
 ### Core Principles
-
 - **Choice Primitives**: Every system interaction is fundamentally a choice between options
 - **Spiral Architecture**: Components can expand from simple to complex in spiral patterns
 - **Agent-Based Orchestration**: Aletheia family agents handle system coordination
@@ -15,7 +12,6 @@ Spiral OS reimagines computing through the lens of choice primitives and spiral 
 - **Vector-Based UI**: Scalable, responsive interface that adapts to choice complexity
 
 ## System Architecture
-
 ```
 spiral-os/
 ├── core/           # Kernel and primitive logic
@@ -26,7 +22,6 @@ spiral-os/
 ```
 
 ### Core Components
-
 - **Spiral Kernel**: Manages choice primitives and system state transitions
 - **Choice Router**: Routes user intentions through available system choices
 - **Aletheia Orchestrator**: Primary agent coordinating system resources
@@ -34,9 +29,7 @@ spiral-os/
 - **Connector Framework**: Handles external system integrations
 
 ## Current Status
-
 🚧 **Early Development Phase**
-
 This project is in active development. The current focus is on:
 1. Establishing core choice primitive patterns
 2. Building the minimal vector UI prototype
@@ -44,116 +37,64 @@ This project is in active development. The current focus is on:
 4. Creating connector architecture
 
 ## Getting Started
-
 ### Prerequisites
-
 - Python 3.9+
-- Modern graphics support (OpenGL/Vulkan)
-- 2GB RAM minimum
 
 ### Quick Start
-
-```bash
+```
+bash
 # Clone the repository
 git clone https://github.com/Constitutional-Solutions/spiral-os.git
 cd spiral-os
-
-# Install dependencies
-pip install -r requirements.txt
-
+# Install dependencies (tkinter is stdlib; nothing else required yet)
+pip install -r requirements.txt || true
 # Run the UI prototype
-python ui/spiral_window.py
+python -m ui.spiral_window
 ```
 
-## Development Roadmap
+## UI Prototype: spiral_window.py
+The UI exposes interactive 2D choice elements on a canvas:
+- Click a node to expand child choices (spiral outward)
+- Click an expanded node to collapse its subtree
+- Click a leaf to toggle selection
+- Hover over a node to see status and a simulated Aletheia hint
+- See JSON event logs in the Log tab and agent messages in the Aletheia tab
 
-### Phase 1: Foundation (Current)
-- [x] Repository setup and documentation
-- [ ] Core choice primitive implementation
-- [ ] Basic vector UI window system
-- [ ] Aletheia agent framework
+Features implemented:
+- Canvas-based nodes with vector links to parents
+- Event logging: expand, collapse, select, reset
+- Simulated Aletheia agent responses per event
+- Reset via button or ESC
 
-### Phase 2: Integration
-- [ ] Agent-UI communication protocols
-- [ ] Connector system architecture
-- [ ] File system integration
-- [ ] Process management
+### Extending to ND (multi-dimensional) overlays
+The UI includes modular hooks to add higher-dimensional overlays without changing core logic:
+- add_nd_dimension(name, renderer): register a renderer callable that receives (canvas, choices). The renderer can draw overlays (e.g., heatmaps, force vectors, timelines) and add bindings.
+- start_agent_dialog(context): placeholder to launch agent-driven dialogs (modal or panel) that can gather structured inputs and update choices.
 
-### Phase 3: Expansion
-- [ ] Network choice primitives
-- [ ] Security framework
-- [ ] Application ecosystem
-- [ ] Performance optimization
+Recommended modular structure for ND elements:
+- ui/nd/
+  - overlays.py: shared primitives for drawing ND layers
+  - timelines.py: temporal overlays and sequencing
+  - spaces.py: coordinate transforms (2D->ND projections)
+  - metrics.py: salience, priority, uncertainty visualizations
 
-### Phase 4: Maturation
-- [ ] Hardware abstraction layer
-- [ ] Multi-architecture support
-- [ ] Production stability
-- [ ] Community governance
+Each module should expose a register(app: SpiralWindow) that calls app.add_nd_dimension(...).
 
-## Open Design Questions
+### Logging and Telemetry
+Logs are appended as JSON lines in the README Log tab at runtime. Each entry has:
+- t: epoch timestamp
+- type: one of [init, expand, collapse, select, reset]
+- additional fields per event (label, level, selected)
 
-We invite community input on these fundamental design decisions:
+For persistent logs, a future enhancement can write to disk via a connector (disabled by default for security).
 
-### 1. Choice Primitive Granularity
-**Question**: At what level should choice primitives operate?
-- **Options**: System calls, UI interactions, data operations, or all levels?
-- **Impact**: Affects performance, complexity, and system coherence
-- **Discussion**: How do we balance expressiveness with efficiency?
-
-### 2. Agent Communication Protocols
-**Question**: How should Aletheia agents coordinate with each other?
-- **Options**: Message passing, shared memory, event systems, or hybrid approaches?
-- **Impact**: Determines system responsiveness and scalability
-- **Discussion**: What communication patterns best support spiral architecture?
-
-### 3. UI Adaptability Scope
-**Question**: How adaptive should the vector UI be?
-- **Options**: Fixed layouts, dynamic scaling, contextual morphing, or user-driven adaptation?
-- **Impact**: Affects usability, performance, and development complexity
-- **Discussion**: How do we balance flexibility with predictability?
-
-### 4. External System Integration
-**Question**: What level of compatibility should we maintain with existing systems?
-- **Options**: Full POSIX compliance, selective compatibility, or native-only approach?
-- **Impact**: Determines adoption path and development effort
-- **Discussion**: How do we innovate while remaining practical?
-
-### 5. Security Model
-**Question**: How do choice primitives interact with security boundaries?
-- **Options**: Capability-based, role-based, context-aware, or hybrid security?
-- **Impact**: Affects system safety and user trust
-- **Discussion**: How do we maintain security while preserving choice flexibility?
+## Roadmap
+- [x] Interactive 2D choices, logging, simulated Aletheia agent
+- [ ] Persist logs and agent transcripts
+- [ ] Pluggable ND overlays (timelines, constraints, metrics)
+- [ ] Real Aletheia agent integration via agent/ module
+- [ ] Choice kernel integration and state router
+- [ ] Theming and accessibility
 
 ## Contributing
-
-We welcome contributions from developers, designers, and thinkers interested in reimagining operating systems. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-### Areas of Interest
-
-- **Core Development**: Kernel primitives and system architecture
-- **UI/UX Design**: Vector interface design and user experience
-- **Agent Engineering**: Aletheia family behavior and coordination
-- **Integration**: Connector development and external system compatibility
-- **Documentation**: Technical writing and community education
-- **Research**: Choice theory, spiral dynamics, and system design
-
-## Community
-
-- **Discussions**: [GitHub Discussions](https://github.com/Constitutional-Solutions/spiral-os/discussions)
-- **Issues**: [Bug Reports & Feature Requests](https://github.com/Constitutional-Solutions/spiral-os/issues)
-- **Wiki**: [Design Documentation](https://github.com/Constitutional-Solutions/spiral-os/wiki)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Built on concepts from choice-primitives project
-- Inspired by agent-based system architectures
-- Community-driven design and development
-
----
-
-*Spiral OS: Where every interaction is a choice, and every choice spirals into possibility.*
+Issues and PRs are welcome. Please keep modules small and composable. Add docstrings and simple examples for ND renderers and dialogs.
