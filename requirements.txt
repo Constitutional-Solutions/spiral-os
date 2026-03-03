@@ -3,8 +3,8 @@
 
 # UI Framework (for spiral_window.py)
 # tkinter is included with Python standard library
-# Pillow for advanced image handling (optional enhancement)
-Pillow>=10.0.0
+# Pillow for advanced image handling (reserved for future image/icon support)
+# Pillow>=10.0.0
 
 # Future dependencies for expanded development:
 # (Uncomment as needed)
